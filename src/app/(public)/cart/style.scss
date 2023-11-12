@@ -1,6 +1,12 @@
 .cartlist-box{
+    padding: 40px 0;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    .cartList{
+        width: 800px;
+    }
 }

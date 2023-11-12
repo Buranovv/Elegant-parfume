@@ -7,7 +7,7 @@ const CartList = () => {
   const { cart } = useCart();
 
   return (
-    <div>
+    <div className="cartList">
       {cart.map((pr) => (
         <CartCard key={pr._id} {...pr} />
       ))}

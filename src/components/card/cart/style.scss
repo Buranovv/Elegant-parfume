@@ -1,65 +1,65 @@
-.cart{
-    max-width: 800px;
+.cart {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  &__body {
+    width: calc(100% - 220px);
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
+  }
+  &__content {
+    h5 {
+      font-family: var(--font-poppins);
+      font-size: 20px;
+    }
+  }
+  &__btn-box {
+    border: 1px solid black;
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    button {
+      width: 30px;
+      height: 30px;
+      border: none;
+
+      background-color: #fff;
+
+      font-size: 20px;
+
+      cursor: pointer;
+    }
+  }
+  &__footer {
+    display: flex;
+    flex-direction: column;
     gap: 20px;
 
-    &__body{
-        width: calc(100% - 220px);
+    button {
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
 
-        display: flex;
-        align-items: center;
-        justify-content:space-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+
+      font-size: 20px;
+
+      background: none;
+
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
     }
-    &__content{
-        h5{
-        font-family: var(--font-poppins);
-        font-size: 20px;
-        }
+    button:hover {
+      background: #dedbd3;
     }
-    &__btn-box{
-        border: 1px solid black;
-        border-radius: 5px;
-
-        overflow: hidden;
-
-        button{
-            width: 30px;
-            height: 30px;
-            border: none;
-
-            background-color: #fff;
-
-            font-size: 20px;
-
-            cursor: pointer;
-        }
-    }
-    &__footer{
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-
-        button{
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-
-            display: flex;
-            align-items: center;
-            justify-content:space-between;
-            gap: 10px;
-
-            font-size: 20px;
-
-            background: none;
-
-            transition: all 0.2s ease-in-out;
-            cursor: pointer;
-        }
-        button:hover{
-            background: #DEDBD3;
-        }
-    }
+  }
 }
