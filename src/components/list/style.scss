@@ -1,0 +1,31 @@
+.card-box {
+  width: 260px !important;
+  margin: 0 auto;
+
+  display: block !important;
+}
+
+
+
+.slick-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  a {
+    transition: all 0.3s ease;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.latestProducts {
+  padding: 40px 0;
+}

@@ -1,0 +1,17 @@
+.cCard {
+  width: 200px;
+  margin: 0 auto;
+
+  &__img-box {
+    img {
+      border-radius: 50%;
+    }
+  }
+  &__body {
+    h5 {
+      margin-top: 10px;
+
+      text-align: center;
+    }
+  }
+}
