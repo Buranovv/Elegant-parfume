@@ -1,5 +1,3 @@
-"use client";
-
 import UniversalData from "@/types/universalData";
 
 import Image from "next/image";

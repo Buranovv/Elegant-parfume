@@ -1,5 +1,3 @@
-"use client";
-
 import Children from "@/types/children";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
