@@ -8,6 +8,7 @@ interface UniversalData {
   category: string;
   createdAt: string;
   sold: number;
+  newQuantity: number;
   image: {
     url: string | undefined;
   };

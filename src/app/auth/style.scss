@@ -170,6 +170,7 @@
       .firstNameInput:valid ~ .firstNameSpan,
       .lastNameInput:valid ~ .lastNameSpan,
       .confirmPasswordInput:valid ~ .confirmPasswordSpan,
+      .phoneNumberInput:valid ~ .phoneNumberSpan,
       .usernameInput:focus ~ .usernameSpan,
       .passwordInput:focus ~ .passwordSpan,
       .firstNameInput:focus ~ .firstNameSpan,

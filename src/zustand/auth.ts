@@ -26,7 +26,7 @@ const useAuth = create<initialState>()((set) => ({
       Cookies.set(ROLE, data?.user?.role);
       Cookies.set(TOKEN, data?.accesstoken);
 
-      if (data.user.role === "1") {
+      if (data.user.role === "0") {
         router.push("/");
         toast.success("Successfully logged in!");
       } else {

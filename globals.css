@@ -11,13 +11,11 @@ li {
   list-style: none;
 }
 
-[data-nextjs-toast-wrapper]{
+[data-nextjs-toast-wrapper] {
   display: none !important;
 }
 
 .active {
-  /* border-bottom: 1px solid #fff; */
-
   color: #ffd050 !important;
 }
 
@@ -70,6 +68,11 @@ li {
   }
   .publicMain {
     margin-top: 71px;
+  }
+}
+@media (max-width: 710px) {
+  .publicMain {
+    margin-top: 56.4px;
   }
 }
 @media (max-width: 450px) {
