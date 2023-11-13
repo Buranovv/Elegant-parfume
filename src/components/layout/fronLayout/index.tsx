@@ -11,9 +11,10 @@ import "./header.scss";
 
 const Header = () => {
   const [togle, setTogle] = useState(false);
+  const [auth, setAuth] = useState(false);
   const [total, setTotal] = useState(0);
-  const { cart } = useCart();
 
+  const { cart } = useCart();
   const { isAuth } = useAuth();
 
   const togleOpen = () => {
@@ -27,7 +28,8 @@ const Header = () => {
 
   useEffect(() => {
     setTotal(cart.length);
-  }, []);
+    setAuth(isAuth);
+  }, [cart, isAuth]);
 
   return (
     <Fragment>
@@ -83,7 +85,7 @@ const Header = () => {
                 </li>
               </ul>
               <div>
-                {isAuth ? (
+                {auth ? (
                   <Navlink href="/account" className="header__loginPage">
                     Akkount
                   </Navlink>
@@ -170,7 +172,7 @@ const Header = () => {
               {total}
             </span>
           </Navlink>
-          {isAuth ? (
+          {auth ? (
             <Navlink
               className="togle__link"
               style={{ backgroundColor: "var(lyt-txt-clr)" }}

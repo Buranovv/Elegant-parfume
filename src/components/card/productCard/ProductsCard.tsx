@@ -24,7 +24,7 @@ const ProductsCard = ({
   return (
     <div className="card">
       <div className="card__img-box">
-        <Image src={image.url ?? ""} width={150} height={150} alt="" />
+        <Image src={image.url ?? ""} width={150} height={150} alt="" priority />
         <svg
           width="20"
           height="20"

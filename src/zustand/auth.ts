@@ -31,13 +31,16 @@ const useAuth = create<initialState>()((set) => ({
       Cookies.set(ROLE, role);
       Cookies.set(TOKEN, accesstoken);
 
+      set({ isAuth: true, role });
+
       request.defaults.headers.Authorization = `Bearer ${accesstoken}`;
 
-      if (role === "0") {
+      if (role === 0) {
         router.push("/");
         toast.success("Successfully logged in!");
       } else {
         router.push("/dashboard");
+        toast.success("Successfully logged in!");
       }
     } finally {
       set({ loading: false });
@@ -55,6 +58,8 @@ const useAuth = create<initialState>()((set) => ({
 
       Cookies.set(ROLE, role);
       Cookies.set(TOKEN, accesstoken);
+
+      set({ isAuth: true, role });
 
       request.defaults.headers.Authorization = `Bearer ${accesstoken}`;
 
