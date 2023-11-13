@@ -19,7 +19,6 @@ const useGetData = create<initialState>()((set) => ({
       set({ loading: true });
       const { data } = await request.get<UniversalData[]>("last-products");
       set({ latestProducts: data });
-      console.log(data);
     } finally {
       set({ loading: false });
     }
@@ -29,7 +28,6 @@ const useGetData = create<initialState>()((set) => ({
       set({ loading: true });
       const { data } = await request.get<UniversalData[]>("category");
       set({ categories: data });
-      console.log(data);
     } finally {
       set({ loading: false });
     }

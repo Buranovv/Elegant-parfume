@@ -21,12 +21,19 @@ const useAuth = create<initialState>()((set) => ({
   login: async (values, router) => {
     try {
       set({ loading: true });
-      const { data } = await request.post("auth/login", values);
+      const {
+        data: {
+          user: { role },
+          accesstoken,
+        },
+      } = await request.post("auth/login", values);
 
-      Cookies.set(ROLE, data?.user?.role);
-      Cookies.set(TOKEN, data?.accesstoken);
+      Cookies.set(ROLE, role);
+      Cookies.set(TOKEN, accesstoken);
 
-      if (data.user.role === "0") {
+      request.defaults.headers.Authorization = `Bearer ${accesstoken}`;
+
+      if (role === "0") {
         router.push("/");
         toast.success("Successfully logged in!");
       } else {
@@ -39,10 +46,17 @@ const useAuth = create<initialState>()((set) => ({
   signUp: async (values, router) => {
     try {
       set({ loading: true });
-      const { data } = await request.post("auth/register", values);
+      const {
+        data: {
+          user: { role },
+          accesstoken,
+        },
+      } = await request.post("auth/register", values);
 
-      Cookies.set(ROLE, data?.user?.role);
-      Cookies.set(TOKEN, data?.accesstoken);
+      Cookies.set(ROLE, role);
+      Cookies.set(TOKEN, accesstoken);
+
+      request.defaults.headers.Authorization = `Bearer ${accesstoken}`;
 
       router.push("/");
       toast.success("Successfully registered!");

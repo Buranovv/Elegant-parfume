@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 
 import { poppins, spaceGrotesk } from "@/assets/fonts";
 import Navlink from "@/components/shares/Navlink";
@@ -11,6 +11,7 @@ import "./header.scss";
 
 const Header = () => {
   const [togle, setTogle] = useState(false);
+  const [total, setTotal] = useState(0);
   const { cart } = useCart();
 
   const { isAuth } = useAuth();
@@ -23,6 +24,10 @@ const Header = () => {
     setTogle(false);
     document.body.style.overflow = "auto";
   };
+
+  useEffect(() => {
+    setTotal(cart.length);
+  }, []);
 
   return (
     <Fragment>
@@ -70,9 +75,9 @@ const Header = () => {
                     </svg>
                     <span
                       className="cart__sup"
-                      style={cart.length < 1 ? { transform: "scale(0)" } : {}}
+                      style={total < 1 ? { transform: "scale(0)" } : {}}
                     >
-                      {cart.length}
+                      {total}
                     </span>
                   </Navlink>
                 </li>
@@ -160,9 +165,9 @@ const Header = () => {
             </svg>
             <span
               className="togle__sup"
-              style={cart.length < 1 ? { transform: "scale(0)" } : {}}
+              style={total < 1 ? { transform: "scale(0)" } : {}}
             >
-              {cart.length}
+              {total}
             </span>
           </Navlink>
           {isAuth ? (
