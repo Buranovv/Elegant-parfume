@@ -19,7 +19,7 @@ import { usePathname, useRouter } from "next/navigation";
 import "./style.scss";
 
 const ProductsList = () => {
-  const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(document.location.search);
   const activePage = params.get("page") || 1;
   const activeSearch = params.get("search") || "";
   const activeFilter = params.get("filter") || "";

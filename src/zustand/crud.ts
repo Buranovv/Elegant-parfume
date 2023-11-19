@@ -43,7 +43,7 @@ const crud = <T>(url: string) => {
     ) => void;
   }
 
-  const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(document.location.search);
   const page = params.get("page") || 1;
   const search = params.get("search");
 
