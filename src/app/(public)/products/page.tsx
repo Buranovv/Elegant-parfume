@@ -1,5 +1,5 @@
-import ProductsList from "@/components/list/ProductsList";
 import { Metadata } from "next";
+import ProductsList from "@/components/list/ProductsList";
 
 export const metadata: Metadata = {
   title: "Elegant parfume | Products",
