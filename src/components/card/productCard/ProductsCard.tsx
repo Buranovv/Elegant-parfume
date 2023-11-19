@@ -14,14 +14,14 @@ const ProductsCard = ({
   sold,
   quantity,
 }: UniversalData) => {
-  const [favList, setFavList] = useState<string[] | null>(null);
+  const [favList, setFavList] = useState<UniversalData[]>([]);
   const { addToCart, addToFav, fav } = useCart();
 
   useEffect(() => {
     setFavList(fav);
   }, [fav]);
 
-  const productInFav = favList?.find((id) => id === _id);
+  const productInFav = favList?.find((pr) => pr._id === _id);
 
   return (
     <div className="card">

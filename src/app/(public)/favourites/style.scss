@@ -1,0 +1,39 @@
+.empty {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h3 {
+      font-family: var(--font-inter);
+
+      font-size: 1.375rem;
+      font-weight: 600;
+      line-height: 1.2em;
+      margin-top: 24px;
+    }
+    p {
+      font-family: var(--font-inter);
+      font-size: 0.8rem;
+      font-weight: 400;
+      line-height: 1.4em;
+      margin-top: 16px;
+    }
+    a {
+      border: none;
+      border-radius: 4px;
+      margin-top: 16px;
+      padding: 9px 18px;
+
+      color: #fff;
+      font-family: var(--font-inter);
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+
+      background-color: #6e00ff;
+      cursor: pointer;
+    }
+}

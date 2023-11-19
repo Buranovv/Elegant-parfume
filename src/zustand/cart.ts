@@ -7,7 +7,7 @@ import request from "@/server";
 
 interface initialState {
   cart: UniversalData[];
-  fav: string[];
+  fav: UniversalData[];
   loading: boolean;
   addToCart: (id: string) => void;
   increaseQuantity: (id: string) => void;
@@ -91,12 +91,13 @@ const useCart = create<initialState>()((set, get) => ({
     const { fav } = get();
     let newFav;
 
-    const productInFav = fav.find((_id) => _id === id);
+    const productInFav = fav.find((pr) => pr._id === id);
 
     if (!productInFav) {
-      newFav = [...fav, id];
+      const { data } = await request.get(`product/${id}`);
+      newFav = [...fav, data];
     } else {
-      newFav = fav.filter((_id) => _id !== id);
+      newFav = fav.filter((pr) => pr._id !== id);
     }
     set({ fav: newFav });
     localStorage.setItem(FAV, JSON.stringify(newFav));

@@ -5,7 +5,7 @@ import Badge, { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { poppins, spaceGrotesk } from "@/assets/fonts";
 import Navlink from "@/components/shares/Navlink";
 import useAuth from "@/zustand/auth";
@@ -18,7 +18,7 @@ const Header = () => {
   const [auth, setAuth] = useState(false);
   const [total, setTotal] = useState(0);
 
-  const { cart } = useCart();
+  const { cart, fav } = useCart();
   const { isAuth } = useAuth();
 
   const togleOpen = () => {
@@ -76,6 +76,15 @@ const Header = () => {
                     <IconButton aria-label="cart">
                       <StyledBadge badgeContent={total} color="secondary">
                         <ShoppingCartIcon />
+                      </StyledBadge>
+                    </IconButton>
+                  </Navlink>
+                </li>
+                <li className="header__item">
+                  <Navlink className="header__link cart" href="/favourites">
+                    <IconButton aria-label="cart">
+                      <StyledBadge badgeContent={fav.length} color="secondary">
+                        <FavoriteIcon />
                       </StyledBadge>
                     </IconButton>
                   </Navlink>
@@ -147,27 +156,23 @@ const Header = () => {
           </Navlink>
           <Navlink className="togle__link" href="/cart" onClick={togleClose}>
             Savatcha
-            <svg
-              width="28"
-              height="28"
-              viewBox="0 0 29 28"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="Icon">
-                <path
-                  id="Icon_2"
-                  d="M9.5 7C9.5 4.5444 11.4295 2 14.5 2C17.5705 2 19.5 4.54439 19.5 7H24V22.25C24 24.3211 22.3211 26 20.25 26H8.75C6.67893 26 5 24.3211 5 22.25V7H9.5ZM11 7H18C18 5.25561 16.6295 3.5 14.5 3.5C12.3705 3.5 11 5.2556 11 7ZM9.5 8.5H6.5V22.25C6.5 23.4926 7.50736 24.5 8.75 24.5H20.25C21.4926 24.5 22.5 23.4926 22.5 22.25V8.5H19.5V11.5H18V8.5H11V11.5H9.5V8.5Z"
-                  fill="#fff"
-                ></path>
-              </g>
-            </svg>
-            <span
-              className="togle__sup"
-              style={total < 1 ? { transform: "scale(0)" } : {}}
-            >
-              {total}
-            </span>
+            <IconButton aria-label="cart">
+              <StyledBadge badgeContent={total} color="secondary">
+                <ShoppingCartIcon />
+              </StyledBadge>
+            </IconButton>
+          </Navlink>
+          <Navlink
+            className="togle__link"
+            href="/favourites"
+            onClick={togleClose}
+          >
+            Savatcha
+            <IconButton aria-label="cart">
+              <StyledBadge badgeContent={fav.length} color="secondary">
+                <FavoriteIcon />
+              </StyledBadge>
+            </IconButton>
           </Navlink>
           {auth ? (
             <Navlink
