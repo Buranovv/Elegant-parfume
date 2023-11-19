@@ -289,7 +289,7 @@ const ProductsPage = () => {
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
                 label="Category"
-                value={selected === null ? category._id : category}
+                value={category}
                 style={{ width: "100%", marginBottom: "20px" }}
                 onChange={(e) => setCategory(e.target.value)}
               >
