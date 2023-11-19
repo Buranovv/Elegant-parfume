@@ -289,6 +289,9 @@ const ProductsPage = () => {
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
                 label="Category"
+                {...register("category", {
+                  required: "This field must not be empty!",
+                })}
                 value={category}
                 style={{ width: "100%", marginBottom: "20px" }}
                 onChange={(e) => setCategory(e.target.value)}
