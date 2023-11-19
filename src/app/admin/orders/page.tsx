@@ -92,6 +92,7 @@ const Orders = () => {
                 <StyledTableCell align="center">User</StyledTableCell>
                 <StyledTableCell align="center">Products</StyledTableCell>
                 <StyledTableCell align="center">Comment</StyledTableCell>
+                <StyledTableCell align="center">Action</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -118,6 +119,7 @@ const Orders = () => {
                   <StyledTableCell align="center">
                     {row.cart.length}
                   </StyledTableCell>
+                  <StyledTableCell align="center">{row.comment}</StyledTableCell>
                   <StyledTableCell align="center">
                     {row.status === "ACCEPTED" ? (
                       <Fragment>
