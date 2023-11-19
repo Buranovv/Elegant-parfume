@@ -5,7 +5,35 @@
   display: block !important;
 }
 
+.productsForm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
+  .searchBox{
+    width: 70%;
+
+    position: relative;
+
+    .svg {
+      position: absolute;
+      right: 15px;
+      top: 12px;
+    }
+  }
+  .search {
+    width: 100%;
+    padding: 10px 40px 10px 20px;
+    border-radius: 10px;
+
+    display: block;
+
+    font-size: 20px;
+    font-family: var(--font-inter);
+
+    outline: none;
+  }
+}
 
 .slick-slide {
   display: flex;
@@ -28,4 +56,14 @@
 
 .latestProducts {
   padding: 40px 0;
+}
+
+@media (max-width: 720px){
+  .productsForm {
+    flex-direction: column;
+
+    .searchBox{
+      width: 100%;
+    }
+  }
 }

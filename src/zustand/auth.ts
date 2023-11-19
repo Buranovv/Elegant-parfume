@@ -39,7 +39,7 @@ const useAuth = create<initialState>()((set) => ({
         router.push("/");
         toast.success("Successfully logged in!");
       } else {
-        router.push("/dashboard");
+        router.push("/admin");
         toast.success("Successfully logged in!");
       }
     } finally {

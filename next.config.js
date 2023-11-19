@@ -9,6 +9,12 @@ const nextConfig = {
         port: "",
         pathname: "/ddegkqlmz/image/upload/**",
       },
+      {
+        protocol: "https",
+        hostname: "uzum.uz",
+        port: "",
+        pathname: "/static/img/**",
+      },
     ],
   },
 };

@@ -9,9 +9,11 @@ export const metadata: Metadata = {
 
 const CartPage = () => {
   return (
-    <main className="publicMain">
-      <div className="cartlist-box">
-        <CartList />
+    <main className="publicMain cartPage">
+      <div className="container">
+        <div className="cartlist-box">
+          <CartList />
+        </div>
       </div>
     </main>
   );

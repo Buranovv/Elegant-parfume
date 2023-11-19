@@ -1,3 +1,4 @@
+import ProductsList from "@/components/list/ProductsList";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,7 +7,13 @@ export const metadata: Metadata = {
 };
 
 const AllProductsPage = () => {
-  return <div>AllProductsPage</div>;
+  return (
+    <main className="publicMain">
+      <div className="container">
+        <ProductsList />
+      </div>
+    </main>
+  );
 };
 
 export default AllProductsPage;

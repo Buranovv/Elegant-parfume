@@ -55,7 +55,9 @@ const CategoriesList = () => {
       ) : (
         <Fragment>
           <div className="section-content">
-            <h3 className="section-title">Categories</h3>
+            <h3 className="section-title" draggable>
+              Kategoriyalar
+            </h3>
           </div>
           <Slider {...settings}>
             {categories.map((ctgr, i) =>

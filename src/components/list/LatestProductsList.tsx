@@ -58,8 +58,12 @@ const LatestProductsList = () => {
       ) : (
         <Fragment>
           <div className="section-content">
-            <h3 className="section-title">Latest products</h3>
-            <Link href="/products">View all</Link>
+            <h3 className="section-title" draggable>
+              Yangi mahsulotlar
+            </h3>
+            <Link href="/products" draggable>
+              View all
+            </Link>
           </div>
           <Slider {...settings}>
             {latestProducts.map((pr, i) =>

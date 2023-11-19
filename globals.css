@@ -41,11 +41,11 @@ li {
   width: 30px !important;
   height: 30px !important;
 
-  display: block;
+  display: block !important;
 
-  font-size: 30px;
-  line-height: 30px;
-  color: black;
+  font-size: 30px !important;
+  line-height: 30px !important;
+  color: black !important;
 }
 
 .container {

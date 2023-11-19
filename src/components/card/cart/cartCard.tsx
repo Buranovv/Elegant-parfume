@@ -21,10 +21,11 @@ const CartCard = ({
     <div className="cart">
       <div className="cart__img-box">
         <Image
-          src={image.url ?? ""}
-          width={200}
-          height={200}
+          src={image?.url ?? ""}
+          width={100}
+          height={100}
           alt="product image"
+          priority
         />
       </div>
       <div className="cart__body">
