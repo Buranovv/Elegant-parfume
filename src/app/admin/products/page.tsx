@@ -74,6 +74,7 @@ const ProductsPage = () => {
     photo,
     category,
     uploadPhoto,
+    setCategory,
   } = useProducts();
   const { categories, getAllCategories } = useGetData();
 
@@ -82,6 +83,7 @@ const ProductsPage = () => {
   const onSubmit = (values: UseFormInputs) => {
     values.image = photo;
     values.category = category;
+    console.log(values.category);
     if (selected === null) {
       addData(values);
     } else {
@@ -287,8 +289,9 @@ const ProductsPage = () => {
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
                 label="Category"
-                value={category}
+                value={selected === null ? category._id : category}
                 style={{ width: "100%", marginBottom: "20px" }}
+                onChange={(e) => setCategory(e.target.value)}
               >
                 <MenuItem value="">
                   <em>None</em>

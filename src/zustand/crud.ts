@@ -31,6 +31,7 @@ const crud = <T>(url: string) => {
       e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => void;
     setPage: (page: number) => void;
+    setCategory: (id: string) => void;
   }
 
   return create<initialStateTypes>()((set, get) => {
@@ -154,6 +155,9 @@ const crud = <T>(url: string) => {
       },
       setPage: (page) => {
         setState({ page });
+      },
+      setCategory: (id) => {
+        setState({ category: id });
       },
     };
   });
