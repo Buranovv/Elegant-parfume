@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, Fragment, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -50,8 +49,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const Users = () => {
   const [category, setCategory] = useState("");
-  const navigate = useRouter();
-  const pathname = usePathname();
   const {
     total,
     allData,
@@ -134,7 +131,7 @@ const Users = () => {
                 variant="outlined"
                 value={search}
                 style={{ width: "100%" }}
-                onChange={(e) => handleSearch(e, pathname, navigate)}
+                onChange={(e) => handleSearch(e)}
               />
               <SearchIcon />
             </div>
@@ -198,7 +195,7 @@ const Users = () => {
           <Pagination
             count={pageSize}
             page={page}
-            onChange={(e, page) => setPage(page, pathname, navigate)}
+            onChange={(e, page) => setPage(page)}
           />
         ) : null}
       </div>
