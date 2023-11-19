@@ -108,84 +108,84 @@ const Users = () => {
 
   return (
     <main>
-          <Box
-            sx={{
-              "& > :not(style)": { m: 1, width: "25ch" },
-            }}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <h2 style={{ width: 150 }}>Users ({total})</h2>
-            <div className="inputBox">
-              <TextField
-                id="outlined-basic"
-                label="Search"
-                variant="outlined"
-                value={search}
-                style={{ width: "100%" }}
-                onChange={(e) => handleSearch(e)}
-                />
-              <SearchIcon />
-            </div>
-            <Button
-              variant="contained"
-              style={{ width: 100 }}
-              endIcon={<AddIcon />}
-              onClick={() => showModal(reset)}
-              >
-              Add
-            </Button>
-          </Box>
-          {loading ? (
-            <Loader />
-          ) : (
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell>Firstname</StyledTableCell>
-                  <StyledTableCell align="center">Lastname</StyledTableCell>
-                  <StyledTableCell align="center">Username</StyledTableCell>
-                  <StyledTableCell align="center">Phone number</StyledTableCell>
-                  <StyledTableCell align="center">Actions</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {allData?.map((row: UniversalData, i) => (
-                  <StyledTableRow
-                    key={i}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <StyledTableCell component="th" scope="row">
-                      {row.firstName}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {row.lastName}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {row.username}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {row.phoneNumber}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      <EditIcon
-                        className="edit"
-                        onClick={() => handleEdit(row._id)}
-                      />
-                      <DeleteIcon
-                        className="delete"
-                        onClick={() => deleteData(row._id)}
-                      />
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+      <Box
+        sx={{
+          "& > :not(style)": { m: 1, width: "25ch" },
+        }}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <h2 style={{ width: 150 }}>Users ({total})</h2>
+        <div className="inputBox">
+          <TextField
+            id="outlined-basic"
+            label="Search"
+            variant="outlined"
+            value={search}
+            style={{ width: "100%" }}
+            onChange={(e) => handleSearch(e)}
+          />
+          <SearchIcon />
+        </div>
+        <Button
+          variant="contained"
+          style={{ width: 100 }}
+          endIcon={<AddIcon />}
+          onClick={() => showModal(reset)}
+        >
+          Add
+        </Button>
+      </Box>
+      {loading ? (
+        <Loader />
+      ) : (
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Firstname</StyledTableCell>
+                <StyledTableCell align="center">Lastname</StyledTableCell>
+                <StyledTableCell align="center">Username</StyledTableCell>
+                <StyledTableCell align="center">Phone number</StyledTableCell>
+                <StyledTableCell align="center">Actions</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {allData?.map((row: UniversalData, i) => (
+                <StyledTableRow
+                  key={i}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <StyledTableCell component="th" scope="row">
+                    {row.firstName}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    {row.lastName}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    {row.username}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    {row.phoneNumber}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <EditIcon
+                      className="edit"
+                      onClick={() => handleEdit(row._id)}
+                    />
+                    <DeleteIcon
+                      className="delete"
+                      onClick={() => deleteData(row._id)}
+                    />
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
       <div>
         {!loading && total > LIMIT ? (
