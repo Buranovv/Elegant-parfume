@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, Fragment } from "react";
+import { useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -130,10 +130,6 @@ const ProductsPage = () => {
 
   return (
     <main>
-      {loading ? (
-        <Loader />
-      ) : (
-        <Fragment>
           <Box
             sx={{
               "& > :not(style)": { m: 1, width: "25ch" },
@@ -165,6 +161,9 @@ const ProductsPage = () => {
               Add
             </Button>
           </Box>
+          {loading ? (
+            <Loader />
+          ) : (
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
@@ -219,8 +218,8 @@ const ProductsPage = () => {
               </TableBody>
             </Table>
           </TableContainer>
-        </Fragment>
-      )}
+          )}
+      
       <div>
         {!loading && total > LIMIT ? (
           <Pagination

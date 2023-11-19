@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, Fragment } from "react";
+import { useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -108,10 +108,6 @@ const Users = () => {
 
   return (
     <main>
-      {loading ? (
-        <Loader />
-      ) : (
-        <Fragment>
           <Box
             sx={{
               "& > :not(style)": { m: 1, width: "25ch" },
@@ -131,7 +127,7 @@ const Users = () => {
                 value={search}
                 style={{ width: "100%" }}
                 onChange={(e) => handleSearch(e)}
-              />
+                />
               <SearchIcon />
             </div>
             <Button
@@ -139,10 +135,13 @@ const Users = () => {
               style={{ width: 100 }}
               endIcon={<AddIcon />}
               onClick={() => showModal(reset)}
-            >
+              >
               Add
             </Button>
           </Box>
+          {loading ? (
+            <Loader />
+          ) : (
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
@@ -187,7 +186,6 @@ const Users = () => {
               </TableBody>
             </Table>
           </TableContainer>
-        </Fragment>
       )}
       <div>
         {!loading && total > LIMIT ? (
