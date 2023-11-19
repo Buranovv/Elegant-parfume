@@ -6,6 +6,7 @@ interface Universal {
   phoneNumber: string;
   password: string;
   currentPassword: string;
+  confirmPassword: string;
   newPassword: string;
   map: (func: object) => void;
 }
