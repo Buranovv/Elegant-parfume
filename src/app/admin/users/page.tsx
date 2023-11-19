@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, Fragment } from "react";
+import { useEffect, Fragment, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -49,6 +49,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const Users = () => {
+  const [category, setCategory] = useState("");
   const navigate = useRouter();
   const pathname = usePathname();
   const {
@@ -141,7 +142,7 @@ const Users = () => {
               variant="contained"
               style={{ width: 100 }}
               endIcon={<AddIcon />}
-              onClick={() => showModal(reset)}
+              onClick={() => showModal(reset, setCategory)}
             >
               Add
             </Button>
@@ -167,7 +168,7 @@ const Users = () => {
                       {row.firstName}
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {row.lastName}
+                      {row.lastName + category}
                     </StyledTableCell>
                     <StyledTableCell align="center">
                       {row.username}
