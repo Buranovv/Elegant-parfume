@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -12,9 +12,12 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
+import Badge from "@mui/material/Badge";
+import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ListItemButton from "@mui/material/ListItemButton";
+import useOrders from "@/zustand/orders";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -83,9 +86,20 @@ const defaultTheme = createTheme();
 export default function AdminLayout({ children }: Children) {
   const router = useRouter();
   const [open, setOpen] = React.useState(true);
+  const [total, setTotal] = useState(0);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  const { getAllData, allData, search, page } = useOrders();
+
+  useEffect(() => {
+    getAllData(search, page);
+  }, [getAllData, search, page]);
+
+  useEffect(() => {
+    setTotal(allData.length);
+  }, [allData]);
 
   useAuthCheck();
 
@@ -120,6 +134,14 @@ export default function AdminLayout({ children }: Children) {
             >
               Dashboard
             </Typography>
+            <IconButton
+              onClick={() => router.push("/admin/orders")}
+              style={{ marginRight: "20px" }}
+            >
+              <Badge badgeContent={total} color="secondary">
+                <MailIcon color="action" />
+              </Badge>
+            </IconButton>
             <IconButton onClick={() => router.push("/admin/account")}>
               <Avatar sx={{ width: 30, height: 30 }}>
                 <PersonIcon />

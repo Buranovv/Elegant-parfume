@@ -14,6 +14,9 @@ interface UniversalData {
   username: string;
   phoneNumber: string;
   password: string;
+  userId: string;
+  status: string;
+  cart: Array<object>;
   image: {
     url: string | undefined;
     public_id: string;

@@ -79,7 +79,7 @@
       }
   
       .inputBox {
-        // position: relative;
+        position: relative;
         margin-bottom: 30px;
       }
       input {
@@ -89,8 +89,6 @@
         border-bottom: 3px solid black;
         background: none;
 
-        display: block;
-  
         color: #000;
         font-size: 20px;
         font-weight: 700;

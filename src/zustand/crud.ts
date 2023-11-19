@@ -4,6 +4,7 @@ import photoData from "./../types/photo";
 import request from "@/server";
 import { UseFormReset } from "react-hook-form";
 import UseFormInputs from "@/types/formInputs";
+import { toast } from "react-toastify";
 import { LIMIT } from "@/constants";
 
 const crud = <T>(url: string) => {
@@ -32,6 +33,8 @@ const crud = <T>(url: string) => {
     ) => void;
     setPage: (page: number) => void;
     setCategory: (id: string) => void;
+    confirm: (id: string) => void;
+    cancel: (id: string) => void;
   }
 
   return create<initialStateTypes>()((set, get) => {
@@ -98,13 +101,13 @@ const crud = <T>(url: string) => {
               ...el,
               key: i,
             }));
-          } else if (url === "category") {
+          } else if (url === "category" || url === "payment") {
             newData = data.map((el: object, i: number) => ({
               ...el,
               key: i,
             }));
           }
-          setState({ allData: newData, total: data?.total ?? newData.length });
+          setState({ allData: newData, total: data?.total ?? newData?.length });
         } finally {
           setState({ loading: false });
         }
@@ -163,6 +166,24 @@ const crud = <T>(url: string) => {
       },
       setCategory: (id) => {
         setState({ category: id });
+      },
+      confirm: async (id) => {
+        try {
+          setState({ loading: true });
+          const { data } = await request.post(`${url}/${id}`);
+          toast.info(data.msg);
+        } finally {
+          setState({ loading: false });
+        }
+      },
+      cancel: async (id) => {
+        try {
+          setState({ loading: true });
+          const { data } = await request.put(`${url}/${id}`);
+          toast.info(data.msg);
+        } finally {
+          setState({ loading: false });
+        }
       },
     };
   });
