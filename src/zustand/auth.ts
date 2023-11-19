@@ -73,6 +73,8 @@ const useAuth = create<initialState>()((set) => ({
     Cookies.remove(ROLE);
     Cookies.remove(TOKEN);
 
+    set({ isAuth: false, role: null });
+
     router.push("/");
   },
 }));

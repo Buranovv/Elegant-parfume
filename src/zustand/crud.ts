@@ -2,7 +2,6 @@ import { create } from "zustand";
 
 import photoData from "./../types/photo";
 import request from "@/server";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { UseFormReset } from "react-hook-form";
 import UseFormInputs from "@/types/formInputs";
 import { LIMIT } from "@/constants";
@@ -23,7 +22,7 @@ const crud = <T>(url: string) => {
     closeModal: () => void;
     showModal: (
       reset: UseFormReset<UseFormInputs>,
-      setCategory: React.Dispatch<SetStateAction<string>>,
+      setCategory: React.Dispatch<SetStateAction<string>>
     ) => void;
     getAllData: (search: string, page: number) => void;
     addData: (values: object) => void;
@@ -32,20 +31,10 @@ const crud = <T>(url: string) => {
     uploadPhoto: (file: FormData) => void;
     deleteData: (id: string) => void;
     handleSearch: (
-      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-      pathname: string,
-      navigate: AppRouterInstance,
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => void;
-    setPage: (
-      page: number,
-      pathname: string,
-      navigate: AppRouterInstance,
-    ) => void;
+    setPage: (page: number) => void;
   }
-
-  const params = new URLSearchParams(document.location.search);
-  const page = params.get("page") || 1;
-  const search = params.get("search");
 
   return create<initialStateTypes>()((set, get) => {
     const setState = (newState: object) => {
@@ -60,10 +49,10 @@ const crud = <T>(url: string) => {
         _id: "",
         url: "",
       },
-      page: +page,
+      page: 1,
       total: 0,
       selected: null,
-      search: search || "",
+      search: "",
       isModalOpen: false,
       isModalLoad: false,
       closeModal: () => {
@@ -158,24 +147,11 @@ const crud = <T>(url: string) => {
         const { getAllData, search, page } = get();
         getAllData(search, page);
       },
-      handleSearch: (e, pathname, navigate) => {
+      handleSearch: (e) => {
         setState({ search: e.target.value, page: 1 });
-        const { page, search } = get();
-
-        const query = new URLSearchParams();
-        query.append("page", page.toString());
-        query.append("search", search);
-
-        navigate.push(`${pathname}?` + query);
       },
-      setPage: (page, pathname, navigate) => {
+      setPage: (page) => {
         setState({ page });
-
-        const query = new URLSearchParams();
-        query.append("page", page.toString());
-        query.append("search", get().search);
-
-        navigate.push(`${pathname}?` + query);
       },
     };
   });

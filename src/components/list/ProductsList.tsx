@@ -9,31 +9,21 @@ import useGetData from "@/zustand/getData";
 import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-
 import ProductsCard from "../card/productCard/ProductsCard";
 import UniversalData from "@/types/universalData";
 import request from "@/server";
 import Loader2 from "../shares/loader/Loader2";
 import Pagination from "@mui/material/Pagination";
-import { usePathname, useRouter } from "next/navigation";
 import "./style.scss";
 
 const ProductsList = () => {
-  const params = new URLSearchParams(document.location.search);
-  const activePage = params.get("page") || 1;
-  const activeSearch = params.get("search") || "";
-  const activeFilter = params.get("filter") || "";
-  const activeSort = params.get("sort") || "";
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const [sort, setSort] = useState(activeSort);
-  const [filter, setFilter] = useState(activeFilter);
+  const [sort, setSort] = useState("");
+  const [filter, setFilter] = useState("");
   const [allData, setAllData] = useState<UniversalData[]>([]);
-  const [page, setPage] = useState(+activePage);
+  const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [search, setSearch] = useState(activeSearch);
+  const [search, setSearch] = useState("");
   const [callback, setCallback] = useState(false);
 
   const { categories, getAllCategories } = useGetData();
@@ -70,27 +60,11 @@ const ProductsList = () => {
     setSearch(e.target.value);
     setPage(1);
 
-    const query = new URLSearchParams();
-    query.append("page", page.toString());
-    query.append("search", e.target.value);
-    query.append("filter", filter);
-    query.append("sort", sort);
-
-    router.push(`${pathname}?` + query);
-
     refetch();
   };
   const handleFilter = (event: SelectChangeEvent) => {
     setFilter(event.target.value as string);
     setPage(1);
-
-    const query = new URLSearchParams();
-    query.append("page", page.toString());
-    query.append("search", search);
-    query.append("filter", event.target.value as string);
-    query.append("sort", sort);
-
-    router.push(`${pathname}?` + query);
 
     refetch();
   };
@@ -98,26 +72,10 @@ const ProductsList = () => {
     setSort(event.target.value as string);
     setPage(1);
 
-    const query = new URLSearchParams();
-    query.append("page", page.toString());
-    query.append("search", search);
-    query.append("filter", filter);
-    query.append("sort", event.target.value as string);
-
-    router.push(`${pathname}?` + query);
-
     refetch();
   };
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
-
-    const query = new URLSearchParams();
-    query.append("page", value.toString());
-    query.append("search", search);
-    query.append("filter", filter);
-    query.append("sort", sort);
-
-    router.push(`${pathname}?` + query);
 
     refetch();
   };
