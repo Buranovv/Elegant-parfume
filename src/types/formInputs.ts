@@ -7,6 +7,7 @@ interface UseFormInputs {
   username: string;
   phoneNumber: string;
   password: string;
+  name: string;
   image: PhotoData | null;
   title: string;
   category: { _id: string; name: string } | string;

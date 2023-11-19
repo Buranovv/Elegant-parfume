@@ -98,8 +98,13 @@ const crud = <T>(url: string) => {
               ...el,
               key: i,
             }));
+          } else if (url === "category") {
+            newData = data.map((el: object, i: number) => ({
+              ...el,
+              key: i,
+            }));
           }
-          setState({ allData: newData, total: data?.total });
+          setState({ allData: newData, total: data?.total ?? newData.length });
         } finally {
           setState({ loading: false });
         }
