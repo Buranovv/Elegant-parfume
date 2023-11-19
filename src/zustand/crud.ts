@@ -22,7 +22,7 @@ const crud = <T>(url: string) => {
     closeModal: () => void;
     showModal: (
       reset: UseFormReset<UseFormInputs>,
-      setCategory: React.Dispatch<SetStateAction<string>>
+      setCategory: React.Dispatch<SetStateAction<string>>,
     ) => void;
     getAllData: (search: string, page: number) => void;
     addData: (values: object) => void;
@@ -31,7 +31,7 @@ const crud = <T>(url: string) => {
     uploadPhoto: (file: FormData) => void;
     deleteData: (id: string) => void;
     handleSearch: (
-      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => void;
     setPage: (page: number) => void;
   }
