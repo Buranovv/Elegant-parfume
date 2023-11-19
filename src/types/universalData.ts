@@ -5,9 +5,7 @@ interface UniversalData {
   price: number;
   description: string;
   quantity: number;
-  category: {
-    name: string;
-  };
+  category: { _id: string; name: string };
   createdAt: string;
   sold: number;
   newQuantity: number;
@@ -18,6 +16,7 @@ interface UniversalData {
   password: string;
   image: {
     url: string | undefined;
+    public_id: string;
   };
 }
 

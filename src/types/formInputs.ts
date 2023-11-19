@@ -1,6 +1,7 @@
 import PhotoData from "@/types/photo";
 
 interface UseFormInputs {
+  _id: string;
   firstName: string;
   lastName: string;
   username: string;
@@ -8,7 +9,7 @@ interface UseFormInputs {
   password: string;
   image: PhotoData | null;
   title: string;
-  category: string;
+  category: { _id: string; name: string } | string;
   price: string;
   quantity: string;
   description: string;

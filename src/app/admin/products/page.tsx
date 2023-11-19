@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, Fragment, useState } from "react";
+import { useEffect, Fragment } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -54,7 +54,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const ProductsPage = () => {
-  const [category, setCategory] = useState("");
   const {
     total,
     allData,
@@ -73,16 +72,12 @@ const ProductsPage = () => {
     getSingleData,
     deleteData,
     photo,
+    category,
     uploadPhoto,
   } = useProducts();
   const { categories, getAllCategories } = useGetData();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    // formState: { errors },
-  } = useForm<UseFormInputs>();
+  const { register, handleSubmit, reset } = useForm<UseFormInputs>();
 
   const onSubmit = (values: UseFormInputs) => {
     values.image = photo;
@@ -163,7 +158,7 @@ const ProductsPage = () => {
               variant="contained"
               style={{ width: 100 }}
               endIcon={<AddIcon />}
-              onClick={() => showModal(reset, setCategory)}
+              onClick={() => showModal(reset)}
             >
               Add
             </Button>
@@ -243,6 +238,16 @@ const ProductsPage = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <input type="file" {...register("image")} onChange={choosePhoto} />
 
+            {photo ? (
+              <Image
+                src={photo?.url ?? ""}
+                height={200}
+                width={300}
+                alt=""
+                priority
+              />
+            ) : null}
+
             <TextField
               size="small"
               id="outlined-basicc"
@@ -284,7 +289,6 @@ const ProductsPage = () => {
                 label="Category"
                 value={category}
                 style={{ width: "100%", marginBottom: "20px" }}
-                onChange={(e) => setCategory(e.target.value)}
               >
                 <MenuItem value="">
                   <em>None</em>

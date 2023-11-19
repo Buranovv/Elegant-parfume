@@ -5,7 +5,6 @@ import request from "@/server";
 import { UseFormReset } from "react-hook-form";
 import UseFormInputs from "@/types/formInputs";
 import { LIMIT } from "@/constants";
-import { SetStateAction } from "react";
 
 const crud = <T>(url: string) => {
   interface initialStateTypes {
@@ -17,13 +16,11 @@ const crud = <T>(url: string) => {
     total: number;
     selected: null | string;
     search: string;
+    category: string;
     isModalOpen: boolean;
     isModalLoad: boolean;
     closeModal: () => void;
-    showModal: (
-      reset: UseFormReset<UseFormInputs>,
-      setCategory: React.Dispatch<SetStateAction<string>>,
-    ) => void;
+    showModal: (reset: UseFormReset<UseFormInputs>) => void;
     getAllData: (search: string, page: number) => void;
     addData: (values: object) => void;
     getSingleData: (id: string, reset: UseFormReset<UseFormInputs>) => void;
@@ -45,37 +42,38 @@ const crud = <T>(url: string) => {
       allData: [],
       loading: false,
       photoLoad: false,
-      photo: {
-        _id: "",
-        url: "",
-      },
+      photo: null,
       page: 1,
       total: 0,
       selected: null,
       search: "",
+      category: "",
       isModalOpen: false,
       isModalLoad: false,
       closeModal: () => {
         setState({ isModalOpen: false, photo: null });
       },
-      showModal: (reset, setCategory) => {
-        setState({ isModalOpen: true, selected: null, photo: null });
+      showModal: (reset) => {
+        setState({
+          isModalOpen: true,
+          selected: null,
+          photo: null,
+          category: "",
+        });
         reset({
           firstName: "",
           lastName: "",
           username: "",
           phoneNumber: "",
           password: "",
-          category: "",
           title: "",
           price: "",
           image: {
             url: "",
-            _id: "",
+            public_id: "",
           },
           quantity: "",
         });
-        setCategory("");
       },
       getAllData: async (search, page) => {
         try {
@@ -120,7 +118,11 @@ const crud = <T>(url: string) => {
         setState({ selected: id });
         const { data } = await request.get<UseFormInputs>(`${url}/${id}`);
         reset(data);
-        setState({ isModalOpen: true, image: data.image });
+        setState({
+          isModalOpen: true,
+          photo: data.image,
+          category: data?.category,
+        });
       },
       updateData: async (values, id) => {
         try {

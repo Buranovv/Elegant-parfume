@@ -1,6 +1,6 @@
 interface photoData {
   url: string;
-  _id: string;
+  public_id: string;
 }
 
 export default photoData;
