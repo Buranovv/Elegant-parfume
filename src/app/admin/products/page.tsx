@@ -10,7 +10,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import { useRouter, usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
 import UseFormInputs from "@/types/formInputs";
 import UniversalData from "@/types/universalData";
@@ -56,8 +55,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const ProductsPage = () => {
   const [category, setCategory] = useState("");
-  const navigate = useRouter();
-  const pathname = usePathname();
   const {
     total,
     allData,
@@ -158,7 +155,7 @@ const ProductsPage = () => {
                 variant="outlined"
                 value={search}
                 style={{ width: "100%" }}
-                onChange={(e) => handleSearch(e, pathname, navigate)}
+                onChange={(e) => handleSearch(e)}
               />
               <SearchIcon />
             </div>
@@ -232,11 +229,10 @@ const ProductsPage = () => {
           <Pagination
             count={pageSize}
             page={page}
-            onChange={(e, page) => setPage(page, pathname, navigate)}
+            onChange={(e, page) => setPage(page)}
           />
         ) : null}
       </div>
-
       <Modal
         open={isModalOpen}
         onClose={closeModal}
