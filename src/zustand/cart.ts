@@ -117,6 +117,8 @@ const useCart = create<initialState>()((set, get) => ({
       set({ loading: true });
       await request.post("payment", obj);
       router.push("/orders");
+      localStorage.removeItem(CART);
+      toast.success("Buyurtmangiz jo`natildi!");
     } finally {
       set({ loading: false });
     }
