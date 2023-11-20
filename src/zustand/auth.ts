@@ -4,11 +4,16 @@ import { create } from "zustand";
 import Cookies from "js-cookie";
 import { TOKEN, ROLE } from "@/constants";
 import { toast } from "react-toastify";
+import UniversalData from "@/types/universalData";
 
 interface initialState {
   loading: boolean;
+  total: number;
+  allData: UniversalData[];
+  payLoading: boolean;
   isAuth: boolean;
   role: string | null;
+  getAllData: () => void;
   login: (values: object, router: AppRouterInstance) => void;
   signUp: (values: object, router: AppRouterInstance) => void;
   logout: (router: AppRouterInstance) => void;
@@ -16,6 +21,9 @@ interface initialState {
 
 const useAuth = create<initialState>()((set) => ({
   loading: false,
+  total: 0,
+  allData: [],
+  payLoading: false,
   isAuth: Boolean(Cookies.get(TOKEN)),
   role: Cookies.get(ROLE) || null,
   login: async (values, router) => {
@@ -76,6 +84,15 @@ const useAuth = create<initialState>()((set) => ({
     set({ isAuth: false, role: null });
 
     router.push("/");
+  },
+  getAllData: async () => {
+    try {
+      set({ payLoading: true });
+      const { data } = await request.get("auth/payments");
+      set({ allData: data, total: data.length });
+    } finally {
+      set({ payLoading: false });
+    }
   },
 }));
 

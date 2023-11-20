@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, Fragment } from "react";
+import { useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -12,12 +12,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import UniversalData from "@/types/universalData";
 import Loader from "@/components/shares/loader/Loader";
-import CloseIcon from "@mui/icons-material/Close";
-import SearchIcon from "@mui/icons-material/Search";
-import CheckIcon from "@mui/icons-material/Check";
-import TextField from "@mui/material/TextField";
-import useOrders from "@/zustand/orders";
-import "./style.scss";
+import useAuth from "@/zustand/auth";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -39,25 +34,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const Orders = () => {
-  const {
-    total,
-    allData,
-    loading,
-    search,
-    getAllData,
-    page,
-    handleSearch,
-    confirm,
-    cancel,
-  } = useOrders();
+const OrdersTable = () => {
+  const { total, allData, payLoading: loading, getAllData } = useAuth();
 
   useEffect(() => {
-    getAllData(search, page);
-  }, [getAllData, search, page]);
+    getAllData();
+  }, [getAllData]);
 
   return (
-    <main>
+    <>
       <Box
         sx={{
           "& > :not(style)": { m: 1, width: "25ch" },
@@ -69,17 +54,6 @@ const Orders = () => {
         }}
       >
         <h2 style={{ width: 150 }}>Orders ({total})</h2>
-        <div className="inputBox">
-          <TextField
-            id="outlined-basic"
-            label="Search"
-            variant="outlined"
-            value={search}
-            style={{ width: "100%" }}
-            onChange={(e) => handleSearch(e)}
-          />
-          <SearchIcon />
-        </div>
       </Box>
       {loading ? (
         <Loader />
@@ -89,14 +63,12 @@ const Orders = () => {
             <TableHead>
               <TableRow>
                 <StyledTableCell>Status</StyledTableCell>
-                <StyledTableCell align="center">User</StyledTableCell>
                 <StyledTableCell align="center">Products</StyledTableCell>
                 <StyledTableCell align="center">Comment</StyledTableCell>
-                <StyledTableCell align="center">Action</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {allData?.map((row: UniversalData, i) => (
+              {allData?.map((row: UniversalData, i: number) => (
                 <StyledTableRow
                   key={i}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -115,26 +87,11 @@ const Orders = () => {
                   >
                     {row.status}
                   </StyledTableCell>
-                  <StyledTableCell align="center">{row.userId}</StyledTableCell>
                   <StyledTableCell align="center">
                     {row.cart.length}
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     {row.comment}
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                    {row.status === "ACCEPTED" ? (
-                      <Fragment>
-                        <CheckIcon
-                          className="edit"
-                          onClick={() => confirm(row._id)}
-                        />
-                        <CloseIcon
-                          className="delete"
-                          onClick={() => cancel(row._id)}
-                        />
-                      </Fragment>
-                    ) : null}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
@@ -142,8 +99,8 @@ const Orders = () => {
           </Table>
         </TableContainer>
       )}
-    </main>
+    </>
   );
 };
 
-export default Orders;
+export default OrdersTable;

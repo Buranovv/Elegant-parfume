@@ -69,7 +69,7 @@
 
     svg{
       path{
-        fill: white;
+        fill: white !important;
       }
     }
     button{
@@ -121,6 +121,12 @@
   display: none;
 
   transition: all 0.3s ease-in-out;
+
+  svg{
+    path{
+      fill: white;
+    }
+  }
 
   .active {
     color: #ffd050;

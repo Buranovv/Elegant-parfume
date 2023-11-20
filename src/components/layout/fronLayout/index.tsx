@@ -9,6 +9,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { poppins, spaceGrotesk } from "@/assets/fonts";
 import Navlink from "@/components/shares/Navlink";
 import useAuth from "@/zustand/auth";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import useCart from "@/zustand/cart";
 import Link from "next/link";
 import "./header.scss";
@@ -19,7 +20,7 @@ const Header = () => {
   const [total, setTotal] = useState(0);
 
   const { cart, fav } = useCart();
-  const { isAuth } = useAuth();
+  const { isAuth, allData, getAllData } = useAuth();
 
   const togleOpen = () => {
     setTogle(true);
@@ -34,6 +35,10 @@ const Header = () => {
     setTotal(cart.length);
     setAuth(isAuth);
   }, [cart, isAuth]);
+
+  useEffect(() => {
+    getAllData();
+  }, [getAllData]);
 
   const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
     "& .MuiBadge-badge": {
@@ -89,6 +94,20 @@ const Header = () => {
                     </IconButton>
                   </Navlink>
                 </li>
+                {auth ? (
+                  <li className="header__item">
+                    <Navlink className="header__link cart" href="/orders">
+                      <IconButton aria-label="cart">
+                        <StyledBadge
+                          badgeContent={allData.length}
+                          color="secondary"
+                        >
+                          <ShoppingCartCheckoutIcon />
+                        </StyledBadge>
+                      </IconButton>
+                    </Navlink>
+                  </li>
+                ) : null}
               </ul>
               <div draggable>
                 {auth ? (
@@ -167,7 +186,7 @@ const Header = () => {
             href="/favourites"
             onClick={togleClose}
           >
-            Savatcha
+            Yoqtirganlarim
             <IconButton aria-label="cart">
               <StyledBadge badgeContent={fav.length} color="secondary">
                 <FavoriteIcon />
@@ -175,14 +194,28 @@ const Header = () => {
             </IconButton>
           </Navlink>
           {auth ? (
-            <Navlink
-              className="togle__link"
-              style={{ backgroundColor: "var(lyt-txt-clr)" }}
-              href="/account"
-              onClick={togleClose}
-            >
-              Akkount
-            </Navlink>
+            <Fragment>
+              <Navlink
+                className="togle__link"
+                href="/orders"
+                onClick={togleClose}
+              >
+                Buyurtmalarim
+                <IconButton aria-label="cart">
+                  <StyledBadge badgeContent={allData.length} color="secondary">
+                    <ShoppingCartCheckoutIcon />
+                  </StyledBadge>
+                </IconButton>
+              </Navlink>
+              <Navlink
+                className="togle__link"
+                style={{ backgroundColor: "var(lyt-txt-clr)" }}
+                href="/account"
+                onClick={togleClose}
+              >
+                Akkount
+              </Navlink>
+            </Fragment>
           ) : (
             <Navlink
               className="togle__link"
