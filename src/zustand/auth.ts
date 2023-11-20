@@ -19,7 +19,7 @@ interface initialState {
   logout: (router: AppRouterInstance) => void;
 }
 
-const useAuth = create<initialState>()((set) => ({
+const useAuth = create<initialState>()((set, get) => ({
   loading: false,
   total: 0,
   allData: [],
@@ -86,12 +86,15 @@ const useAuth = create<initialState>()((set) => ({
     router.push("/");
   },
   getAllData: async () => {
-    try {
-      set({ payLoading: true });
-      const { data } = await request.get("auth/payments");
-      set({ allData: data, total: data.length });
-    } finally {
-      set({ payLoading: false });
+    const { isAuth } = get();
+    if (isAuth) {
+      try {
+        set({ payLoading: true });
+        const { data } = await request.get("auth/payments");
+        set({ allData: data, total: data.length });
+      } finally {
+        set({ payLoading: false });
+      }
     }
   },
 }));
